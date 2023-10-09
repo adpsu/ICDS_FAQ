@@ -19,3 +19,33 @@ The relationship between memory per core and the running speed of a task in MATL
 7. Hardware Configuration: The underlying hardware, including CPU architecture, memory speed, and interconnects, can impact the relationship between memory and task performance. Different hardware may require different memory configurations for optimal performance.
 
 In summary, the optimal memory per core setting depends on a combination of factors, including the specific task, hardware, parallelization strategy, and resource availability. Experimentation and monitoring are often necessary to fine-tune memory settings for optimal performance. It's important to strike a balance between providing enough memory to avoid bottlenecks and not allocating excessive memory that leads to inefficient resource utilization.
+
+-------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------
+How to create new conda environment and use it?
+
+We have a few suggestions to improve your workflow:
+
+a) When running jobs, it's best not to use the submit node. Instead, request a dedicated compute node using the following command, adjusting the resources to match your requirements:
+
+```
+$ salloc -A open --nodes=1 --ntasks-per-node=1 --mem-per-cpu=64GB --time=02:00:00
+```
+
+b) We recommend creating a dedicated Anaconda environment for your work. You can include commonly used packages and easily install more in the future. Here's how to set it up (You may want to change the version of python):
+
+```
+$ module load anaconda3
+$ conda create -n my_env python=3.8 numpy pandas matplotlib scikit-learn
+$ source activate my_env
+$ python3 Test.py
+```
+
+To install additional packages in the future, simply use:
+
+```
+$ conda install package_name
+```
+
+This approach allows you to manage and extend your Anaconda environment efficiently. 
